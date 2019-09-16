@@ -48,9 +48,9 @@ function initApp(){
     const urlParams = getUrlVars();
     if(urlParams.hasOwnProperty("q")){//Si tenemos algo que buscar
 
-    }else if(urlParams.hasOwnProperty("artist")){//Si tenemos parametro artista
+    }else if(urlParams.hasOwnProperty("character")){//Si tenemos parametro de personaje
 
-    }else{//Si no mostramos el top segun el pais
+    }else{//Si no mostramos todos los personajes
         ajaxHandler("https://rickandmortyapi.com/api/character", function (data) {
             data.results.map(val => renderCharacter(val));
         });
