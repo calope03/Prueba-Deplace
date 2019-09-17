@@ -1,5 +1,5 @@
 function renderCharacter(character) {
-    document.getElementById("renderHere").innerHTML += `<div class="col-md-3"><div class="card">
+    document.getElementById("renderHere").innerHTML += `<div class="col-md-3"><div class="card text-white bg-secondary">
         <img class="card-img-top" src="${character.image}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">${character.name}</h5>
@@ -17,10 +17,9 @@ function renderCharacter(character) {
             </div>
         </div>
         <div class="card-body text-right">
-            <a href="index.html?character=${character.id}" class="btn btn-primary">Ver más</a>
+            <a href="index.html?character=${character.id}" class="btn btn-blue">Ver más</a>
         </div>
         </div></div>`;
-    console.log("Character:", character);
 }
 
 function checkResults(data){
@@ -81,6 +80,7 @@ function initApp(){
     }else{//Si no mostramos todos los personajes
         ajaxHandler("https://rickandmortyapi.com/api/character", function (data) {
             data.results.map(val => renderCharacter(val));
+            console.log(data)
         });
     }
 }

@@ -1,7 +1,15 @@
 body {
-  padding-top: 65px;
+  padding-top: 70px;
+  background-image: url("../images/wallpaper1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+@font-face {
+  font-family: "rick";
+  src: local("get_schwifty"), url(../fonts/get_schwifty.ttf) format("truetype");
+}
 @media (min-width: 576px) {
   .card-columns {
     column-count: 2;
@@ -24,7 +32,7 @@ body {
 }
 
 .container {
-  background-color: aquamarine;
+  /*background-color: aquamarine;*/
 }
 
 .list-info {
@@ -34,6 +42,41 @@ body {
 
 .navbar-fixed-top {
   border: 0;
-  top:0;
+  top: 0;
   display: flex;
+}
+
+.card{
+    margin-bottom: 1rem;
+}
+
+#title{
+    font-family: "rick";
+    font-size: 1.5rem;
+    color: #00B0C8;
+}
+
+.btn-outline-blue{
+    color: #00B0C8;
+    background-color: transparent;
+    background-image: none;
+    border-color: #00B0C8;
+}
+
+.btn-outline-blue:hover{
+    color: #fff;
+    background-color: #00B0C8;
+    border-color: #00B0C8;
+}
+
+.btn-blue{
+    color: #fff;
+    background-color: #00B0C8;
+    border-color: #00B0C8;
+}
+
+.btn-blue:hover{
+    color: #fff;
+    background-color: #008799;
+    border-color: #008799;
 }
