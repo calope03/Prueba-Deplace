@@ -22,11 +22,28 @@ function renderCharacter(character) {
         </div></div>`;
 }
 
+function pagination(data){
+    const urlParams = getUrlVars();
+    const page = urlParams["page"];
+    const prev = parseInt(page)-1;
+    const next = parseInt(page)+1;
+    document.getElementById("renderHere").innerHTML += `<div class="col-md-12">
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a id="prev" class="page-link btn btn-blue" href="index.html?name=${urlParams["name"]||""}&status=${urlParams["status"]||""}&page=${prev||""}">Previous</a></li>
+            <li class="page-item"><a class="page-link btn btn-blue-dark">${page}</a></li>
+            <li class="page-item"><a id="next" class="page-link btn btn-blue" href="index.html?name=${urlParams["name"]||""}&status=${urlParams["status"]||""}&page=${next||""}">Next</a></li>
+        </ul></div>`;
+}
+
 function checkResults(data){
+    const urlParams = getUrlVars();
     if(data.results){
         data.results.map(val => renderCharacter(val));
+        pagination(data);
     }else{
         console.log("mostrar mensaje de error")
+        document.getElementById("tubusqueda").innerText = ` ${urlParams["name"]} `;
+        error.style.display = 'block';
     }
 }
 
@@ -51,37 +68,45 @@ function getUrlVars() {
     return vars;
 }
 
+function insertEpisodes(episodes){
+    document.getElementById("listEpisodes").innerHTML += episodes.map(function(episode){
+        let arrEpisode = episode.split('/');
+        return `<a href=""> ${arrEpisode.pop()}</a>`
+    });
+}
+
 function renderUniqueCharacter(data){
-    console.log(data);
     document.getElementById("renderHere").innerHTML = `
+    <button type="button" id="backButton" class="btn btn-blue mt-3">Atrás</button>
+    <div id="fichaActor" class="col-md-12 row" >
     <div class="col-md-12 text-center">
-        <h2>${data.name}</h2>
+        <h2 id="nameCharacter">${data.name}</h2>
     </div>
     <div class="col-md-4">
-        <img class="img-fluid" src="${data.image}" alt="Card image cap">
+        <img class="rounded img-fluid" src="${data.image}" alt="Card image cap">
     </div>
     <div class="col-md-8 row">
-        <div class="col-md-6 details">Estado: </div><div class="col-md-6 details">${data.status}</div>
-        <div class="col-md-6 details">Especie: </div><div class="col-md-6 details">${data.species}</div>
-        <div class="col-md-6 details">Tipo (subespecie): </div><div class="col-md-6 details">${data.type}</div>
-        <div class="col-md-6 details">Genero: </div><div class="col-md-6 details">${data.gender}</div>
-        <div class="col-md-6 details">Planeta de origen: </div><div class="col-md-6 details">${data.origin.name}</div>
-        <div class="col-md-6 details">Localizacion actual: </div><div class="col-md-6 details">${data.location.name}</div>
-        <div class="col-md-6 details">Episodios: </div><div id="listEpisodes" class="col-md-6 details">------------</div>
-    </div>`;
+        <div class="col-md-4 details"><p>Estado:</p></div><div class="col-md-8 details">${data.status}</div>
+        <div class="col-md-4 details"><p>Especie:</p></div><div class="col-md-8 details">${data.species}</div>
+        <div class="col-md-4 details"><p>Tipo (subespecie):</p></div><div class="col-md-8 details">${data.type}</div>
+        <div class="col-md-4 details"><p>Genero:</p> </div><div class="col-md-8 details">${data.gender}</div>
+        <div class="col-md-4 details"><p>Planeta de origen:</p></div><div class="col-md-8 details">${data.origin.name}</div>
+        <div class="col-md-4 details"><p>Localizacion actual:</p></div><div class="col-md-8 details">${data.location.name}</div>
+        <div class="col-md-4 details"><p>Episodios:</p></div><div id="listEpisodes" class="col-md-8 details"></div>
+    </div></div>`;
+    insertEpisodes(data.episode);
+    document.getElementById("backButton").addEventListener('click',function(){window.history.back()},false);
 }
 
 function initApp(){
     const urlParams = getUrlVars();
-    if(urlParams.hasOwnProperty("name")){//Si tenemos algo que buscar
-        ajaxHandler(`https://rickandmortyapi.com/api/character/?name=${urlParams["name"]}&status=${urlParams["status"]}`, checkResults);
-    }else if(urlParams.hasOwnProperty("character")){//Si tenemos parametro de personaje
+    var error = document.getElementById('error');
+    error.style.display = 'none';
+
+    if(urlParams.hasOwnProperty("character")){//Si tenemos parametro de personaje
         ajaxHandler(`https://rickandmortyapi.com/api/character/${urlParams["character"]}`, renderUniqueCharacter);
-    }else{//Si no mostramos todos los personajes
-        ajaxHandler("https://rickandmortyapi.com/api/character", function (data) {
-            data.results.map(val => renderCharacter(val));
-            console.log(data)
-        });
+    }else{
+        ajaxHandler(`https://rickandmortyapi.com/api/character/?name=${urlParams["name"]||""}&status=${urlParams["status"]||""}&page=${urlParams["page"]||""}`, checkResults);
     }
 }
 

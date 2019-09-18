@@ -16,7 +16,7 @@
 <body>
 
     <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
-        <a id="title" class="navbar-brand" href="index.html">Rick and Morty API</a>
+        <a id="title" class="navbar-brand" href="index.html?page=1">Rick and Morty API</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -25,15 +25,26 @@
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar..." name="name">
                 <select class="form-control mr-sm-2" id="exampleFormControlSelect1" name="status">
-                        <option value="">Elegir...</option>
-                        <option value="alive">Alive</option>
-                        <option value="dead">Dead</option>
-                        <option value="unknown">Unknown</option>
+                    <option value="">Elegir...</option>
+                    <option value="alive">Alive</option>
+                    <option value="dead">Dead</option>
+                    <option value="unknown">Unknown</option>
                 </select>
+                <input type="hidden" name="page" value="1">
                 <button class="btn btn-outline-blue my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </div>
     </nav>
+
+    <div id="error" class="container justify-content-center">
+        <div class=" col-md-12 alert alert-danger alert-dismissible show" role="alert">
+            Lo sentimos, no se ha encontrado ningun resultado para <strong><span id="tubusqueda"></span></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <img class="offset-md-2 col-md-8" src="public/images/error1.png"></img>
+    </div>
 
     <div class="container">
         <div id="renderHere" class="row">

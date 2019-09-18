@@ -1,5 +1,5 @@
 body {
-  padding-top: 70px;
+  padding-top: 65px;
   background-image: url("../images/wallpaper1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -31,9 +31,6 @@ body {
   }
 }
 
-.container {
-  /*background-color: aquamarine;*/
-}
 
 .list-info {
   margin-top: 1rem;
@@ -47,7 +44,7 @@ body {
 }
 
 .card{
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 #title{
@@ -70,13 +67,60 @@ body {
 }
 
 .btn-blue{
-    color: #fff;
+    color: #fff !important;
     background-color: #00B0C8;
     border-color: #00B0C8;
 }
 
-.btn-blue:hover{
-    color: #fff;
+.btn-blue-dark{
+    color: #fff !important;
     background-color: #008799;
     border-color: #008799;
+}
+
+.btn-blue:hover{
+    color: #fff !important;
+    background-color: #008799;
+    border-color: #008799;
+}
+
+.page-item{
+    margin: 0 1rem;
+    
+}
+.page-link{
+    border-radius: 0.25rem;
+}
+
+#fichaActor{
+  margin-top: 1rem;
+  background-color: rgba(108, 117, 125, 0.95);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+#nameCharacter{
+  -webkit-text-stroke: 1px greenyellow;
+  font-family: "rick";
+  font-size: 2.5rem;
+  color: #00B0C8;
+  padding: 1.2rem;
+}
+
+.details{
+  color: #313131;
+  padding: 0.75rem 0;
+  border-top: 1px solid rgba(255,255,255,.75);
+}
+
+.details>p{
+  margin:0;
+  color: white;
+  font-weight: bold;
+}
+
+.details>a{
+  color:inherit;
 }
